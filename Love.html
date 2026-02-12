@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For You 💫</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #a855f7, #d946ef, #f0abfc);
+      color: #fff;
+      overflow-x: hidden;
+    }
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 10px; }
+    p { max-width: 700px; line-height: 1.7; opacity: 0.95; }
+
+    .btn {
+      margin-top: 30px;
+      padding: 15px 35px;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff6a88, #ff99ac);
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+    .btn:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 25px 45px rgba(0,0,0,0.45);
+    }
+
+    .hidden { display: none; }
+
+    .glass {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(14px);
+      border-radius: 25px;
+      padding: 35px;
+      max-width: 900px;
+      width: 100%;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      animation: fadeUp 0.9s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
+    }
+    .gallery img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 18px;
+      transition: transform 0.35s, box-shadow 0.35s;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    }
+    .gallery img:hover {
+      transform: scale(1.07);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.55);
+    }
+
+    /* modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      padding: 20px;
+    }
+    .modal-content {
+      max-width: 900px;
+      width: 100%;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(14px);
+      border-radius: 25px;
+      padding: 25px;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.7);
+      animation: fadeUp 0.6s ease;
+    }
+    .modal-content img {
+      width: 100%;
+      max-height: 60vh;
+      object-fit: cover;
+      border-radius: 18px;
+      margin-bottom: 15px;
+    }
+    .story {
+      font-size: 1rem;
+      line-height: 1.8;
+      opacity: 0.95;
+    }
+
+    .photo-card { position: relative; cursor: pointer; }
+    .photo-card:hover img { transform: scale(1.08); box-shadow: 0 20px 45px rgba(0,0,0,0.55); }
+    .label {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.55);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+    }
+
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      width: 0;
+      background: linear-gradient(90deg, #ff6a88, #ffcc70);
+      z-index: 99;
+      transition: width 0.4s;
+    }
+
+    footer { opacity: 0.7; margin-top: 30px; font-size: 0.85rem; }
+    /* floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp linear forwards;
+      pointer-events: none;
+      opacity: 0.8;
+    }
+    @keyframes floatUp {
+      from { transform: translateY(0) scale(1); opacity: 0.9; }
+      to { transform: translateY(-110vh) scale(1.6); opacity: 0; }
+    }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<section id="s1">
+  <h1>Halowww Bubbb🤍💗💕❤️</h1>
+  <p>Happy Valentine Yaw MyPrinces MyWorld MyLovee❤️💕🩷💗🤍🩵</p>
+  <button class="btn" onclick="next(2)">Di Click Bubb</button>
+</section>
+
+<section id="s2" class="hidden">
+  <div class="glass">
+    <h1>Our little gallery</h1>
+    <p>Click on the photos one by one. Each photo has a story.</p>
+    <div class="gallery">
+      <div class="photo-card" onclick="openImg('FotoLove1.1.jpg','Di foto ini kitaa pertamakali ketemuan and nyeblakk bareng hehehe seruu banget sii bubbb , apalagi kamuu yangg malu maluu cih bubb wkwkwkw dan ini suatu kenangan yanggg seruuu apalagii pas pesen susu wkkwkw gausah tambah gula soalnya ada kamu wkwkkwkw gituu kan bubb heheehheh and di sini juga dimana kita langsung jadiann ahahahhai hehehe')">
+        <img src="FotoLove1.jpg" alt="Foto 1">
+        <span class="label">Lihat sinii bubb</span>
+      </div>
+      <div class="photo-card" onclick="openImg('FotoLove2.jpg','Kalo di foto ini hari ke 2 kitaa main or meet terus juga akuu main ke rumah kamuu and mall , terus juga di sini kita ada kejadian yang sipa nabrak pantat bapack bapck wkwkwk ngakak sii bubbb and ini first kitaa mam cireng langanan kita sebelum kamu ngambek sama abangnya wkwkwk , and yang aku masi manggil papa and mama itu om tante wkwkkw maaf canggung bubb hehehe awal mah bubb , and fotonyaa lucuuu bangett bubbb soalnya ada kamuu hahahaiiii wkkwkwkw 🤍💕🩷🩵💜')">
+        <img src="FotoLove2.jpg" alt="Foto 2">
+        <span class="label">Lihat Ceritanya bubb</span>
+      </div>
+      <div class="photo-card" onclick="openImg('FotoLove3.jpg','Di foto ini pas aku botak and pake topi bubbb , aneh si bub aku botak mah bubb tapii makasih banget kamu udaa menerima akuuu walau aku botak hehe , kata aku si pas boatak aneh aku tapi kamu selalu bilang akuu gantengg hehhe maaciww banget bubb🤍🥺❤️')">
+        <img src="FotoLove3.jpg" alt="Foto 3">
+        <span class="label">Klik inii bubb</span>
+      </div> 
+      <div class="photo-card" onclick="openImg('FotoLove4.1.jpg','Ini foto pas kita joging di monas bubb malem malem lagii bubbb , seru bangett si bubbb joging malem apalagi barengg kamuu bubbb walau kamu agak ngambek sikit bubb tapi lucu nagmbek kamu bubb xixixii😙🤭 , and juga foto aku full nyengir bangett wkwkwk akuu mah selalu full senyum saat bertemu dirimu bubbb hehehe')">
+        <img src="FotoLove5.jpeg" alt="Foto 4">
+        <span class="label">inii bubb</span>
+      </div>
+      <div class="photo-card" onclick="openImg('FotoLove4.jpeg','Foto ini pass aku abis ngecat kamar kamu and setelah sholatt bubb hehe udaa cocokk  akujadi imam kamu bubb ehhehe and abistuu kitaa juga bikin at least an bubb and ketawa katawa bareng lucu bangett yaww bubb kitaa bubb😘😍🩵🩷')">
+        <img src="FotoLove4.jpeg" alt="Foto 5">
+        <span class="label">sinii Bubb</span>
+      </div>
+      <div class="photo-card" onclick="openImg('FotoLove6.jpg','Sumpahh fotoo inii Lucyuuu ban gett tauu bubb suerr kaya intinyaa lucu banget and ini tuu kitaa sekalian bikin trend yang biceps bubb heheheh ihhh jadi inget trend yang itu tau bubb yang basket anjayyy suatuu hal yang aku pengenn bangett terjadii bubb hehehhe intinyaa happy banget sii bubbb💜❤️🤍🩵💕💗')">
+        <img src="FotoLove6.jpg" alt="Foto 6">
+        <span class="label">ini Sayanggg</span>
+      </div>
+      <div class="photo-card" onclick="openImg('FotoLove7.jpg','Nahh kalo ini bubbb fotooo lucu kitaaa ber3 Akuu kamu and ame bubbb , jadi ke inget yang dikiraa ame anak kitaa bubb wkwkwk , seruu banget bubbb ama ame walauu nyeselin ngikut ngikut tapi enaknya dia diem kalau ikut bubb hehee intinyaa seruu banget bubbbb')">
+        <img src="FotoLove7.jpg" alt="Foto 7">
+        <span class="label">inii jugaa Princes</span>
+      </div>
+      <div class="photo-card" onclick="openImg('FotoLove8.jpg','Ini pass kitaa setelah nonton bioskop yangg akuu tunggu tunggu banget bubbb zootopia 2 bubbb ahhahahah maacii banget bubbb mau nemein aku nonton tontonan anak kecill bubb pas nonton juga rata rata bocil wkwk intinyaa kita juga couple baju nyaa bubbb hehehe lucyuuuu bubbb walauu akuu bajunya kaya agakk ke gedean bubb heheheh🧡💜🩶🤎💛')">
+        <img src="FotoLove8.jpg" alt="Foto 8">
+        <span class="label">inii jugaa bubb</span>
+      </div>
+      <div class="photo-card" onclick="openImg('FotoTercintaa.png','Bubub mode Yali-yali-li wkwkkw ampe sound tiktok juga arabb MasyaAllah bangett bubb udaa cocok bangett bubbb beuhh bubbb❤️🧡💛💚💙💙💚💛💚💙💙💚💛nantii tinggal aku pake jubahh bubb udaaa cocok banget bubb beuhh bubb MasyaAllah banget pastinya bubbb and juga itu pas kita nongkrong mam pancong beuh enak bubb abistu fotoo lucuu lucuu dehh bubb hehehe intinyaa happy banget si kitaa bubb seruuu bangett bubbb😘😘😘😘😘😘😘😘🧡❤️❤️🧡💛💚💙💜💙💚💛🧡❤️🧡💜🩶🤎💛💜❤️🤍🩵💕💗')">
+        <img src="FotoTercintaa.png" alt="Foto 9">
+        <span class="label">Click Bubb</span>
+      </div>
+      <div class="photo-card" onclick="openImg('FotoLove9.jpg','Sumpahh kamuu lucu bangett inii mach bubbbb hahahaha lucyuu ahh bubbb gemessss bangett bubbbb mauu gimana pun kamuu cantık bangett bangettt lusyuuuu bangetttt bangett imyutt banget banget bubbbb suerr ini mahh not fake fake bubb real bubb mauu di gimanain kamuu selaluu paling spesial paling wash banget beuhh bubbbb intinyaa masyaAllahh bangett bubbb❤️🧡💛💚💙💙💚💛💚💙💙💚💛🧡❤️❤️🧡💛💚💙💜💙💚💛🧡❤️🧡💜🩶🤎💛💜❤️🤍🩵💕💗💜❤️🤍🩵💕💗😘😍😘😍😘😍😘😍😘😍😘😍😘😍😘😍😘😍😘😍')">
+        <img src="FotoLove9.jpg" alt="Foto 9">
+        <span class="label">inii jugaa MyLove</span>
+      </div>
+    </div>
+    <button class="btn" onclick="next(3)">Nexttt bubb</button>
+  </div>
+</section>
+
+<section id="s3" class="hidden">
+  <div class="glass">
+    <h1>Mini Story About we</h1>
+    <p>Pertemuan kita di mulai dari kita ketemu di apk tele yaaww bubb tapi maybe yaa kitaa sebenernya peneh ketemu pas kita sd țapi mungkin kita ngga ngeh ajaa gitu bubbb yaa intinya gituu bubb laluu di lanjut dengan hal tak di duga juga aku langsung nembak pas first meet wawww di motor juli lalu yaww bubb terus di lanjut dengan akuu yang pergi ke arab and botak hehehe tapi kamu masi menerima aku dengan apa adanya yang botak kaya plenger dikit atau aneh wkwwkkw hehee + kamu sering bilang aku ganteng maaciwww banget dehh bubb terus lanjut lagi dengan banyakk ceritaa kitaa mulaii kaya joging and nyoba mam mam gitu and selalu jajan lalu makan bareng di rumah or di depan rumah gitu atau di loudry bubb and juga mencoba hal hal baru bareng seruu banget sii bubbbb bareng bareng teruss , menurut aku kaya ibaratkan suatu hal yang bisa di bilang kaya kata ripan umar gitu when yah wkwkwkw tapii aku udaa pernah lakuin bareng kamuu hahahahaii seruu bangett maaciiww bubbbb💜🩵 and jugaa banyak momen kitaa yang seruu banget kaya nganterin kamu lamar kerja abistu mencoba hal baru lainnya intinya bubb bareng kamuu seruu banget berkesan banget buat diri akuu seruunyaa banget banget bubb beuhhh and juga kita menghadapin banyak rintangan kaya yang hampir putus and bikin kita saling marah saling ngambek tapiii akhirnya tetep berdamai and bareng lagiii walau nantinya berantem lagi tapii bakal baikan lagi seru banget bubb banyak banget initinya cerita kita bubb seruu seru banget bubbb mungkin kalau full detail disini nggakan cukup hehee intinya seru banget banget bubbb.</p>
+    <button class="btn" onclick="choice('A')">Selanjutnya Bubbb🤍💗💕❤️</button>
+  </div>
+</section>
+
+<section id="s4" class="hidden">
+  <div class="glass">
+    <h1 id="result"></h1>
+    <p>Akuu mauu bilangg makasihh banyak banyak terimakasih ats semua pertemuan kita , and juga terimakasih atas semua kebaikan kamuu membuat kesan aku bikin aku bahagiaa seneng terus selalu excited and seru seruan bareng kamuu sedih senang aku bareng kamuu kita hadapin bareng bareng , suer aku saat malem aku selalu bilang makasih ke allah sudah mempertemukan dirimu yang tida duga oleh diriku terimakasih atas semuanya bubbb , and kalau kamu mau tau aku malem suka ngomong dalam hati aku rindu ama kamu kangen gitu and selalu ingin bilang terimaksih ke kamuu banyak kesan baikk yaa intinya pengen kaya jalur langit jadi lewat allah nanti ke hati kamu gitu bubb hehehe , dan banyak aku belajar jugaa dari kamuu and kita bubbb makasihh banyakk yaa bubbb  and juga aku terimakasih jugaa kee keluarga kamuu and semua orang orang di sekitar suda baikk dengan adanya diri akuu maksihh banyak banyak banget bubb😁😙😘 | Maaf yaa bubbb mungkin banyak hal yang harus aku perbaiki lagi and banyak hal buruk or jahat gitu ke kamu bubb minta maaf sebesar besarnya bubb atas semua nya bubb mulai dari perilaku aku atau sikap akuu atau hal yang banyak kurang dari aku minta maaf sebesar besarnyaa bubb atass semuanyaa bubb and juga aku mintaa maaf atas semua kejadian yang membuat kamu sakit hati and membuat hati kecilmu terluka karena aku mintaa maaf sebesar besarnya maafin juga atas semua perlakuan orang di sekitar aku maaf banget membuat kamu sakit hati and bisa menjadi trauma buat kamu minta maaf setulus tulus nyaa maaff banget atass semuanyaa bubbb🙏🏻🥺🥹.</p>
+    <button class="btn" onclick="next(5)">Lastt Banget ini mahh bubbb cius bubb</button>
+  </div>
+</section>
+
+<section id="s5" class="hidden">
+  <div class="glass">
+    <h1>Sedikit kata kata dari aku bubb hehee</h1>
+    <p>Aku juga mau bilang aku always stay with you bubb mau gimana pun keadaannya aku sudaa membuat perjanjian dengan diri aku sendiri aku siap menampung semua badai atau hal hal yang lainnya namun mungkin untuk saat ini aga berbeda maaf ya tapii aku ngga berubah mungkin yang dulunya bar bar aku sekarang lebih kalem lagi and belajr menjadi lebih baik lagi bubb aku always sama kamu koo bubb mau giman pun juga aku pengen ama kamu terus bubbb akuu masi pengen ngebuktiin banyak hal yang suda aku janjikan dengan diri aku sendiri bubb heheh begitu bubb kamu liat saja perjuangan aku bubb aku percaya proses and usahain buat yang terbaik abnget buat diri aku and kita bubb aku fokus ama diri aku sendiri ko bub pas aku sendiri sambil menunggu waktu yang pas buat kita lagi bub aku selalu menyendiri and menahan sampai hal yang aku ingin kan terwujud begitu bubb and semoga jalan kita di permudahkan oleh allah bubb aamiinn آمين يا رب العالمين I LOVE YOU SO MUCH MUCH MUCH VERY VERY MUCH BUBB ALWAYS FALLINGIN IN LOVE WITH YOUU BUBB HEHEHE I LOVE YOUU SO MUCH MUCH MUCH BUBBB MUAACHHHHHHHHH🧡❤️❤️🧡💛💚💙💜💙💚💛🧡❤️🧡💜🩶🤎💛💜❤️🤍🩵💕💗💜❤️🤍🩵💕💗💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡.</p>
+    <p>Semoga bubub sehat selaluu and di lancarkan semuanya , dan juga hal hal baik dateng ke kamu and rezeki semuanya jadi lancar and di permudahkan juga semua urusannya and sehat selalu juga buat orang orang di sekitar kamuu and terimakasih jika kamu suda mau membaca semuanya yang banyak banget ini effort kamu MasyaAllah Tabarokallah banget and semoga juga di beri jalan yang lurus sama allah ramin menjadi lebih baik lagi dari sebelumnyaa aamiinn ya rabbal alaminn آمين يا رب العالمين to be better yaar bubb and aku always ada koo bubb aku usahain sebaik baiknya bubb hehehee begitu bubb , nanti mungkin kalau ada lagi aku sampaikan ke kamu bubb yaww bubbb I LOVE YOUU SO VERY VERY VERY MUCH MUCH MUCH VERY VERY MUCHH MY PRINCES MYWORLD MYGALAXY MYEVERYTHING ALWAYS LOVEE YOUU AND FALLING IN LOVE WITH YOU AGAIN AND AGAIN WITH YOU BUBBBB💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡🧡❤️❤️🧡💛💚💙💜💙💚💛🧡❤️🧡💜🩶🤎💛💜❤️🤍🩵💕💗💜❤️🤍🩵💕💗💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡💙💜💙💚💛🧡❤️🧡.</p>
+    <footer>Made By Danish H.R | For MyLove MyWorld MyPrinces❤️🩵🤍💗🩷💕 | 💜Indira Bella Nasuha💜 .</footer>
+  </div>
+</section>
+
+<div class="modal" id="modal" onclick="closeImg()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <img id="modalImg" />
+    <div class="story" id="modalStory">CERITA DI SINI</div>
+  </div>
+</div>
+
+<script>
+  function next(n) {
+    document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+    document.getElementById('s' + n).classList.remove('hidden');
+    document.getElementById('progress').style.width = ((n-1)/4*100) + '%';
+    window.scrollTo(0,0);
+  }
+
+  function openImg(src, story) {
+    document.getElementById('modal').style.display = 'flex';
+    document.getElementById('modalImg').src = src;
+    document.getElementById('modalStory').innerText = story;
+  }
+
+  function closeImg() {
+    document.getElementById('modal').style.display = 'none';
+  }
+
+  function choice(c) {
+    next(4);
+    document.getElementById('result').innerText = c === 'A'
+      ? 'There’s something I’d like to tell you.'
+      : '.';
+  }
+  // floating hearts generator
+  const hearts = ['💜','💖','💘','💗','🤍','💞'];
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerText = hearts[Math.floor(Math.random()*hearts.length)];
+    heart.style.left = Math.random() * 200 + 'vw';
+    heart.style.animationDuration = (4 + Math.random()*1) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }, 30);
+</script>
+
+</body>
+</html>
